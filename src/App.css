@@ -1,0 +1,210 @@
+.background-image-nature {
+  background-image: url("./assets/Home/love_nature_bg.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bg-image-architecture {
+  background-image: url("./assets/Home/architecture_inspired_by_the_art_of_nature.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+.background-image-slider-one {
+  background-image: url("./assets/Home/Nature\ News_bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.background-image-birdsInParadise {
+  background-image: url("./assets/Home/Projects/birds_in_paradise_image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.background-image-blissInTheWoods {
+  background-image: url("./assets/Home/Projects/bliss_in_the_woods_image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.background-image-mudIsMyName {
+  background-image: url("./assets/Home/Projects/mud_is_my_name_image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.background-image-nature-nest-image {
+  background-image: url("./assets/Home/Projects/nature_nest_image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.testmonials-bg-image {
+  background-image: url("./assets/Home/Testimonials_leaf.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.bg-about-img {
+  background-image: url("./assets/About/bg_cover.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.blooming_flowers_bg {
+  background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
+  height: 100vh !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+.bg-projects-img {
+  background-image: url("./assets/projects_cover.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+@media (max-width: 1200px) {
+  .blooming_flowers_bg {
+    background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
+    height: 50vh !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+}
+@media (max-width: 768px) {
+  .blooming_flowers_bg {
+    background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
+    height: 50vh !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+}
+.menu-item-home {
+  transform: translateX(-20px);
+}
+
+.menu-item-home.animate-home {
+  animation: menuSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.menu-item-about {
+  transform: translateX(-40px);
+}
+
+.menu-item-about.animate-about {
+  animation: menuSlideIn 0.8s ease-out forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    transform: translateX(-40px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.menu-item-projects {
+  transform: translateX(-60px);
+}
+
+.menu-item-projects.animate-projects {
+  animation: menuSlideIn 1s ease-out forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    transform: translateX(-60px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.menu-item-career {
+  transform: translateX(-80px);
+}
+
+.menu-item-career.animate-career {
+  animation: menuSlideIn 1.2s ease-out forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    transform: translateX(-80px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.menu-item-contact {
+  transform: translateX(-100px);
+}
+
+.menu-item-contact.animate-contact {
+  animation: menuSlideIn 1.4s ease-out forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.cross-animation {
+  animation: fadeInAnimation 1s ease-in;
+}
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.text-white {
+  color: white !important;
+}
+.slide-title {
+  white-space: pre-line;
+}
+.font-18 {
+  font-size: 18px !important;
+}
+.font-semibold {
+  font-weight: 600 !important;
+}
+.text-light-green {
+  color: #95b67b !important;
+}
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+.font-weight-800 {
+  font-weight: 800 !important;
+}

@@ -1,1 +1,41 @@
 @import "tailwindcss";
+html {
+  font-family: "area-normal", sans-serif;
+  font-weight: 100;
+}
+
+h1,h2 {
+  font-size: 30px !important;
+  font-weight: 100;
+  line-height: 32px !important;
+}
+
+@media (min-width: 767px) and (max-width: 1024px){
+  h1,h2 {
+    font-size: 26px !important;
+    font-weight: 100;
+    line-height: 26px !important;
+  }
+}
+@media (max-width: 766px) {
+  h1,h2 {
+    font-size: 20px !important;
+    font-weight: 100;
+    line-height: 20px !important;
+  }
+  h1{
+    line-height: 26px !important;
+  }
+}
+p {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  color:#7A7A7A;
+}
+h4{
+  font-size: 18px !important;
+}
+h3{
+  font-size: 18px !important;
+}
