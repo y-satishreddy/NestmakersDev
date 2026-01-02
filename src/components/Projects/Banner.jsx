@@ -3,6 +3,7 @@ import BirdsInParadiseLogo from "../../assets/Home/Projects/birds_in_paradise_lo
 import NatureNestImageLogo from "../../assets/Home/Projects/nature_nest_logo.svg";
 import MudIsMyNameLogo from "../../assets/Home/Projects/mud_is_my_name_logo.svg";
 import { useState } from "react";
+import { motion } from "framer-motion";
 const Banner = () => {
   const [opacityBTW, setOpacityBTW] = useState(false);
   const [opacityMMN, setOpacityMMN] = useState(false);
@@ -12,16 +13,24 @@ const Banner = () => {
     <>
       <section className="h-[40vh] w-full bg-projects-img pt-[120px]">
         <div className="flex flex-col items-center justify-center md:px-[50px] px-[20px]">
-          <h1 className="text-white text-center w-full font-weight-500 mb-[10px]">
+          <motion.h1
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeIn" }}
+            className="text-white text-center w-full font-weight-500 mb-[10px]"
+          >
             Projects
-          </h1>
+          </motion.h1>
         </div>
       </section>
-      <section className="w-full flex items-center justify-center">
+      <section className="w-full flex items-center justify-center overflow-x-hidden">
         <div className="max-w-[1400px] px-[20px] md:px-[50px] w-full py-[50px] md:py-[100px]">
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] ">
-            <div
+            <motion.div
+              initial={{ x: -500, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              viewport={{once:true,amount:0.2}}
               className="h-[400px] group w-full relative"
               onClick={() => {
                 setOpacityBTW(!opacityBTW);
@@ -55,10 +64,14 @@ const Banner = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
+              initial={{ x: 500, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               className="h-[400px] group w-full relative"
+              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(false);
@@ -91,10 +104,14 @@ const Banner = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
+              initial={{ x: -500, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               className="h-[400px] group w-full relative"
+              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(false);
@@ -127,10 +144,14 @@ const Banner = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
+              initial={{ x: 500, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               className="h-[400px] group w-full relative"
+              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(!opacityBIP);
@@ -165,7 +186,7 @@ const Banner = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

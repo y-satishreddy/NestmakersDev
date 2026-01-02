@@ -65,6 +65,18 @@
   background-repeat: no-repeat;
   background-position: bottom;
 }
+.bg-birds-in-the-paradise-projects{
+  background-image: url("./assets/birds_in_the_paradise.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bg-nature-nest-projects{
+  background-image: url("./assets/natures_nest.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 @media (max-width: 1200px) {
   .blooming_flowers_bg {
     background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
@@ -207,4 +219,7 @@
 }
 .font-weight-800 {
   font-weight: 800 !important;
+}
+.overflow-x-hidden{
+  overflow-x: hidden !important;
 }
