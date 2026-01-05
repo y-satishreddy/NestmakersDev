@@ -15,7 +15,7 @@ const BirdsInParadise = () => {
       <motion.section
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.1 }}
         className=" w-full flex items-center justify-center"
       >

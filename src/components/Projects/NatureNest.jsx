@@ -19,7 +19,7 @@ const NatureNest = () => {
           <motion.p
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeIn" }}
+            transition={{ duration: 0.8, ease: "easeIn" }}
             viewport={{ once: true, viewport: 0.2 }}
             className="w-full md:w-[550px] text-center"
           >

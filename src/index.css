@@ -1,10 +1,11 @@
 @import "tailwindcss";
 html {
-  font-family: "area-normal", sans-serif;
+
   font-weight: 100;
 }
 
 h1,h2 {
+    font-family: "area-normal", sans-serif;
   font-size: 30px !important;
   font-weight: 100;
   line-height: 32px !important;
@@ -12,6 +13,7 @@ h1,h2 {
 
 @media (min-width: 767px) and (max-width: 1024px){
   h1,h2 {
+      font-family: "area-normal", sans-serif;
     font-size: 26px !important;
     font-weight: 100;
     line-height: 26px !important;
@@ -19,23 +21,46 @@ h1,h2 {
 }
 @media (max-width: 766px) {
   h1,h2 {
+      font-family: "area-normal", sans-serif;
     font-size: 20px !important;
     font-weight: 100;
     line-height: 20px !important;
   }
   h1{
+      font-family: "area-normal", sans-serif;
     line-height: 26px !important;
   }
 }
 p {
+    font-family: "area-normal", sans-serif;
   font-size: 16px !important;
   font-weight: 400 !important;
   line-height: 20px !important;
   color:#7A7A7A;
 }
 h4{
+    font-family: "area-normal", sans-serif;
   font-size: 18px !important;
 }
 h3{
+    font-family: "area-normal", sans-serif;
   font-size: 18px !important;
+}
+input,
+textarea {
+  line-height: 1.2;
+}
+input,
+textarea {
+  font: initial;
+  font-family: inherit;
+  line-height: 1.4;
+}
+input,
+textarea {
+  
+  line-height: 1.4;
+}
+#form{
+  scroll-margin-top:250px !important ;
 }

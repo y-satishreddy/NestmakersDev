@@ -27,10 +27,12 @@ const Banner = () => {
         <div className="max-w-[1400px] px-[20px] md:px-[50px] w-full py-[50px] md:py-[100px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] ">
             <motion.div
-              initial={{ x: -500, opacity: 0 }}
+              initial={{ x: "-100%", opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
-              viewport={{once:true,amount:0.2}}
+              viewport={{ once: true, amount: 0.01 }}
+              onViewportEnter={() => console.log('BTW entered viewport')}
+              onViewportLeave={() => console.log('BTW left viewport')}
               className="h-[400px] group w-full relative"
               onClick={() => {
                 setOpacityBTW(!opacityBTW);
@@ -67,11 +69,13 @@ const Banner = () => {
             </motion.div>
 
             <motion.div
-              initial={{ x: 500, opacity: 0 }}
+              initial={{ x: "100%", opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
+              viewport={{ once: true, amount: 0.01 }}
+              onViewportEnter={() => console.log('MMN entered viewport')}
+              onViewportLeave={() => console.log('MMN left viewport')}
               className="h-[400px] group w-full relative"
-              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(false);
@@ -107,11 +111,13 @@ const Banner = () => {
             </motion.div>
 
             <motion.div
-              initial={{ x: -500, opacity: 0 }}
+              initial={{ x: "-100%", opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
+              viewport={{ once: true, amount: 0.01 }}
+              onViewportEnter={() => console.log('NN entered viewport')}
+              onViewportLeave={() => console.log('NN left viewport')}
               className="h-[400px] group w-full relative"
-              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(false);
@@ -147,11 +153,13 @@ const Banner = () => {
             </motion.div>
 
             <motion.div
-              initial={{ x: 500, opacity: 0 }}
+              initial={{ x: "100%", opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
+              viewport={{ once: true, amount: 0.01 }}
+              onViewportEnter={() => console.log('BIP entered viewport')}
+              onViewportLeave={() => console.log('BIP left viewport')}
               className="h-[400px] group w-full relative"
-              viewport={{once:true,amount:0.2}}
               onClick={() => {
                 setOpacityBTW(false);
                 setOpacityBIP(!opacityBIP);
