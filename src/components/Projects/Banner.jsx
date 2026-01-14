@@ -4,6 +4,7 @@ import NatureNestImageLogo from "../../assets/Home/Projects/nature_nest_logo.svg
 import MudIsMyNameLogo from "../../assets/Home/Projects/mud_is_my_name_logo.svg";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 const Banner = () => {
   const [opacityBTW, setOpacityBTW] = useState(false);
   const [opacityMMN, setOpacityMMN] = useState(false);
@@ -141,13 +142,12 @@ const Banner = () => {
                   <h2 className="w-full text-center text-white">
                     Nature's Nest
                   </h2>
-                  <a
-                    href="#"
-                    target="_blank"
+                  <Link
+                    to="/projects/nature-nest"
                     className="py-5 pt-6 rounded px-6 bg-[#00AF4C] hover:bg-[#35674E] text-white text-center leading-0 text-[18px]"
                   >
                     Know More
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -185,13 +185,12 @@ const Banner = () => {
                   <h2 className="w-full text-center text-white">
                     Bird's In Paradise
                   </h2>
-                  <a
-                    href="#"
-                    target="_blank"
+                  <Link
+                    to="/projects/birds-in-paradise"
                     className="py-5 pt-6 rounded px-6 bg-[#009992] hover:bg-[#35674E] text-white text-center leading-0 text-[18px]"
                   >
                     Know More
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

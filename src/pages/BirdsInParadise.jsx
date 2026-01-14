@@ -4,9 +4,9 @@ import BirdsInParadise from "../components/Projects/BirdsInParadise";
 const About = () => {
   return (
     <>
-      <Navbar />
+  
       <BirdsInParadise/>
-      <Footer/>
+ 
     </>
   );
 };

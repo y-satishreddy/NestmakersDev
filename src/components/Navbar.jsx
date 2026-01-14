@@ -1,188 +1,161 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../assets/white_logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import MenuIcon from "../assets/Menu.svg";
+
+const dropdownBox = {
+  hidden: {
+    opacity: 0,
+    y: -10,
+    scale: 0.96,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.28,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    scale: 0.96,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn",
+      when: "afterChildren",
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const dropdownItem = {
+  hidden: { opacity: 0, x: 12 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    x: 12,
+    transition: { duration: 0.18, ease: "easeIn" },
+  },
+};
+
 const Navbar = () => {
-  const [rotated, setRotated] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
   useEffect(() => {
-    const handleScrolled = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScrolled);
-    return () => window.removeEventListener("scroll", handleScrolled);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  const menuItems = [
+    { name: "HOME", path: "/" },
+    { name: "ABOUT", path: "/about" },
+    { name: "PROJECTS", path: "/projects" },
+    { name: "CAREER", path: "/careers" },
+    { name: "CONTACT", path: "/contact" },
+  ];
+
   return (
     <section
-      className={`z-[1000] fixed w-full flex items-center justify-center flex-col z-10 transition-all duration-700 ease-in ${
+      className={`fixed z-[1000] w-full transition-all duration-700 ${
         scrolled ? "bg-[#35674E]" : "bg-transparent"
       }`}
     >
-      <div className="relative max-w-[1400px] w-full flex items-center justify-between px-[20px] md:px-[50px] py-2">
-        <div className="w-[50%] h-full">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="block md:w-[100px] w-[90px] h-full"
-          />
-        </div>
-        <div
-          className={`relative bg-transparent w-[50%] flex items-center justify-end cursor-pointer`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            id="Component_2_3"
-            data-name="Component 2 – 3"
-            width="40.819"
-            height="40"
-            viewBox="0 0 40.819 40"
-            className={`duration-700 ease-in-out transition-transform hover:rotate-[360deg] origin-center ${
-              menuOpen ? "rotate-[360deg] opacity-0" : "opacity-100"
-            }`}
-            onClick={() => {
-              setRotated(!rotated);
-              setMenuOpen(true);
-            }}
-          >
-            <defs>
-              <clipPath id="clip-path">
-                <rect
-                  id="Rectangle_7"
-                  data-name="Rectangle 7"
-                  width="40.819"
-                  height="40"
-                  fill="none"
-                ></rect>
-              </clipPath>
-            </defs>
-            <g id="Group_20" data-name="Group 20" clip-path="url(#clip-path)">
-              <path
-                id="Path_35"
-                data-name="Path 35"
-                d="M174.9,179.191c.182.2.281.312.387.418.7.7,1.4,1.388,2.088,2.092a.656.656,0,0,1,.055.957.635.635,0,0,1-.954.02q-1.864-1.832-3.7-3.692a.617.617,0,0,1,.01-.953q1.823-1.842,3.669-3.662a.661.661,0,0,1,.959,0,.644.644,0,0,1-.034.954c-.7.715-1.412,1.416-2.118,2.123-.105.105-.2.218-.364.39.191.012.285.024.379.024,4.76,0,9.52.008,14.281,0a2.611,2.611,0,0,0,2.7-2.214,2.494,2.494,0,0,0-.352-1.764,12.754,12.754,0,0,0-2.533-3.053.539.539,0,0,0-.441-.119,9.077,9.077,0,0,1-6.651-.3,10.835,10.835,0,0,1-6.145-5.591,8.532,8.532,0,0,1-.553-1.921c-.12-.616.01-.784.588-1.012a8.281,8.281,0,0,1,5.384-.181,11.337,11.337,0,0,1,7.333,5.674,6.353,6.353,0,0,1,.526,1.35,1.577,1.577,0,0,0,.542.83A15.13,15.13,0,0,1,192.937,173a3.971,3.971,0,0,1-3.464,6.188H174.9m12.931-9.589c-.316-.216-.53-.383-.762-.518a22.311,22.311,0,0,0-1.979-1.108c-.843-.381-1.725-.676-2.6-.993-.567-.207-.788-.71-.467-1.13a.775.775,0,0,1,.931-.216,18.007,18.007,0,0,1,4.007,1.714c.117.068.238.128.372.2.007-.068.021-.1.011-.119-.064-.111-.129-.222-.2-.327a10.347,10.347,0,0,0-5.781-4.04,7.578,7.578,0,0,0-3.854-.177c-.535.123-.576.159-.385.689a7.356,7.356,0,0,0,.586,1.326,10.172,10.172,0,0,0,6.751,4.722,7.122,7.122,0,0,0,3.369-.023"
-                transform="translate(-152.82 -142.884)"
-                fill="#fff"
-              ></path>
-              <path
-                id="Path_36"
-                data-name="Path 36"
-                d="M126.385,14.752c.321-1.184.59-2.258.915-3.316a.983.983,0,0,1,.526-.582c.517-.17.9.3.753.888-.253,1.009-.531,2.011-.8,3.015q-.233.867-.471,1.732c-.169.614-.436.776-1.035.618q-2.359-.623-4.715-1.255c-.5-.136-.723-.455-.613-.859s.455-.568.962-.435c.966.253,1.93.513,2.9.768.1.027.212.04.392.073-.442-.766-.846-1.467-1.251-2.168q-3.032-5.241-6.065-10.48a2.558,2.558,0,0,0-3.552-1.092,3.169,3.169,0,0,0-1.068,1.064,11.629,11.629,0,0,0-1.383,3.662.539.539,0,0,0,.1.447,8.918,8.918,0,0,1,3,5.475,11.385,11.385,0,0,1-1.058,7.562,7.387,7.387,0,0,1-2,2.425c-.474.371-.713.38-1.179.02a8.1,8.1,0,0,1-2.8-4.35,11.4,11.4,0,0,1,.99-9.093,4.552,4.552,0,0,1,.832-1.135,2.9,2.9,0,0,0,.841-1.708,13.837,13.837,0,0,1,1.433-3.875,3.965,3.965,0,0,1,7.006-.086q3.5,6.057,7,12.112c.091.158.19.312.35.573m-16.33-5c-1.97,3.051-1.6,8.863,1.257,11.217,3.318-2.791,3.231-9.8.3-12.5a1.938,1.938,0,0,0-.07.335,16.671,16.671,0,0,0-.024,2.009c.114,1.188.306,2.369.473,3.551a.712.712,0,0,1-.5.865.691.691,0,0,1-.859-.507c-.028-.081-.048-.164-.068-.247a18.706,18.706,0,0,1-.508-4.717"
-                transform="translate(-95.131 -0.001)"
-                fill="#fff"
-              ></path>
-              <path
-                id="Path_37"
-                data-name="Path 37"
-                d="M7.953,140.385l-3.066.814c-.11.029-.22.062-.331.088a.667.667,0,0,1-.874-.458.66.66,0,0,1,.533-.833c.783-.218,1.572-.416,2.357-.626s1.57-.425,2.355-.635c.688-.184.95-.038,1.134.636q.622,2.288,1.238,4.578a.786.786,0,0,1-.145.873.659.659,0,0,1-1.1-.36c-.27-.945-.515-1.9-.772-2.845-.04-.146-.087-.289-.155-.51-.116.174-.2.283-.265.4q-3.514,6.072-7.028,12.144a2.794,2.794,0,0,0-.429,2,2.561,2.561,0,0,0,2.507,2.116,12.6,12.6,0,0,0,4.122-.682.447.447,0,0,0,.262-.283,8.975,8.975,0,0,1,3.606-5.63,10.844,10.844,0,0,1,7.582-2.525,12.107,12.107,0,0,1,2.364.54.692.692,0,0,1,.5.87,8.871,8.871,0,0,1-3.517,5.725,11.174,11.174,0,0,1-7.124,2.646,16.987,16.987,0,0,1-2.115-.271,1.354,1.354,0,0,0-.577.026,16.219,16.219,0,0,1-4.774.92,3.823,3.823,0,0,1-3.589-1.84A3.73,3.73,0,0,1,.556,153.2q3.521-6.117,7.065-12.222c.1-.167.188-.337.332-.6m3.824,16.633c3.817.139,8.487-3.166,9.1-6.692-3.978-1.526-10.2,2.092-11,6,.06-.022.115-.037.165-.061a16.96,16.96,0,0,0,4.664-3.147c.412-.4.815-.414,1.124-.084s.269.739-.167,1.114c-.691.6-1.39,1.186-2.121,1.732-.553.413-1.162.753-1.765,1.138"
-                transform="translate(0 -122.804)"
-                fill="#fff"
-              ></path>
-              <path
-                id="Path_38"
-                data-name="Path 38"
-                d="M222.413,180.315a7.121,7.121,0,0,1-3.369.023,10.172,10.172,0,0,1-6.751-4.722,7.352,7.352,0,0,1-.586-1.326c-.191-.53-.151-.566.385-.689a7.578,7.578,0,0,1,3.854.177,10.348,10.348,0,0,1,5.781,4.04c.074.1.139.216.2.327.011.018,0,.051-.011.119-.134-.071-.255-.132-.372-.2a18.011,18.011,0,0,0-4.007-1.714.776.776,0,0,0-.931.216c-.32.419-.1.923.467,1.13.87.317,1.753.612,2.6.993a22.292,22.292,0,0,1,1.979,1.108c.232.135.446.3.762.518"
-                transform="translate(-187.404 -153.597)"
-                fill="#95b67b"
-              ></path>
-              <path
-                id="Path_39"
-                data-name="Path 39"
-                d="M120.949,75.3a18.706,18.706,0,0,0,.508,4.717c.02.083.04.167.068.247a.691.691,0,0,0,.859.507.712.712,0,0,0,.5-.865c-.168-1.183-.36-2.363-.473-3.551a16.665,16.665,0,0,1,.024-2.009,1.941,1.941,0,0,1,.07-.335c2.93,2.706,3.017,9.714-.3,12.5-2.857-2.353-3.227-8.166-1.257-11.217"
-                transform="translate(-106.025 -65.545)"
-                fill="#95b67b"
-              ></path>
-              <path
-                id="Path_40"
-                data-name="Path 40"
-                d="M88.256,244.589c.6-.385,1.212-.725,1.765-1.138.731-.546,1.43-1.136,2.121-1.732.435-.375.474-.786.167-1.114s-.712-.311-1.124.084a16.96,16.96,0,0,1-4.664,3.147c-.051.023-.1.039-.165.061.8-3.907,7.023-7.526,11-6-.613,3.526-5.282,6.831-9.1,6.692"
-                transform="translate(-76.48 -210.375)"
-                fill="#95b67b"
-              ></path>
-            </g>
-          </svg>
-          {menuOpen && (
-            <div className="absolute right-0 top-0 bottom-0 h-full flex flex-col items-end cross-animation">
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="40"
-                  height="46"
-                  fill="none"
-                  className="cursor-pointer stroke-white stroke-[1.5]"
-                  strokeLinecap="round"
-                  onClick={() => {
-                    setMenuOpen(false);
-                  }}
+      <div className="relative max-w-[1400px] mx-auto flex items-center justify-between px-[20px] md:px-[50px] py-2">
+   
+        <Link to="/">
+          <img src={Logo} alt="Logo" className="w-[90px] md:w-[100px]" />
+        </Link>
+
+
+        <div className="relative">
+    
+          <AnimatePresence mode="wait">
+            {!menuOpen ? (
+              <motion.img
+                key="menu"
+                src={MenuIcon}
+                className="w-[40px] h-[40px] cursor-pointer"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                whileHover={{ rotate: 90 }}
+                onClick={() => setMenuOpen(true)}
+              />
+            ) : (
+              <motion.div
+                key="close"
+                className="relative w-[40px] h-[40px] cursor-pointer flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                whileHover={{ rotate: 180 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="absolute w-[26px] h-[2px] bg-white rotate-45 rounded-full" />
+                <span className="absolute w-[26px] h-[2px] bg-white -rotate-45 rounded-full" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                className="absolute right-0 top-[55px] mt-3 origin-top-right"
+                variants={dropdownBox}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+              >
+                <motion.ul
+                  className="
+                    w-[150px]
+                    bg-black/80 
+                    rounded-md
+                    px-5 py-4
+                    flex flex-col gap-4
+                    text-white
+                 text-right
+                  "
                 >
-                  <line x1="19" y1="5" x2="5" y2="19" />
-                  <line x1="5" y1="5" x2="19" y2="19" />
-                </svg>
-              </div>
-              <div>
-                <ul className="bg-[#000000]/40 p-4 text-white flex flex-col items-end gap-y-1 mt-[20px] transition-all duration-700 ease-in-out">
-                  <li className="menu-item-home animate-home">
-                    <Link
-                      to="/"
-                      className={
-                        location.pathname === "/"
-                          ? "text-[#95b67b]"
-                          : "text-white"
-                      }
-                    >
-                      HOME
-                    </Link>
-                  </li>
-                  <li className="menu-item-about animate-about">
-                    <Link
-                      to="/about"
-                      className={
-                        location.pathname === "/about"
-                          ? "text-[#95b67b]"
-                          : "text-white"
-                      }
-                    >
-                      ABOUT
-                    </Link>
-                  </li>
-                  <li className="menu-item-projects animate-projects">
-                    <Link
-                      className={
-                        location.pathname === "/projects"
-                          ? "text-[#95b67b]"
-                          : "text-white"
-                      }
-                    >
-                      PROJECTS
-                    </Link>
-                  </li>
-                  <li className="menu-item-career animate-career">
-                    <Link
-                      className={
-                        location.pathname === "/career"
-                          ? "text-[#95b67b]"
-                          : "text-white"
-                      }
-                    >
-                      CAREER
-                    </Link>
-                  </li>
-                  <li className="menu-item-contact animate-contact">
-                    <Link
-                      className={
-                        location.pathname === "/contact"
-                          ? "text-[#95b67b]"
-                          : "text-white"
-                      }
-                    >
-                      CONTACT
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          )}
+                  {menuItems.map((item) => (
+                    <motion.li key={item.name} variants={dropdownItem}>
+                      <Link
+                        to={item.path}
+                        onClick={() => setMenuOpen(false)}
+                        className={`text-rightblock text-[18px] transition-all duration-200 hover:text-[#95b67b] ${
+                          location.pathname === item.path
+                            ? "text-[#95b67b]"
+                            : "text-white"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>

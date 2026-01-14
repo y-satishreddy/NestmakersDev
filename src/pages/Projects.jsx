@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 const Projects = () => {
   return (
     <>
-    <Navbar/>
+
     <Banner/>
-    <Footer/>
+
     </>
   )
 };

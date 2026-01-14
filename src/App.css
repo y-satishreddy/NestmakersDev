@@ -40,44 +40,54 @@
   background-repeat: no-repeat;
   background-position: bottom;
 }
-.testmonials-bg-image {
-  background-image: url("./assets/Home/Testimonials_leaf.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
+@media (min-width: 768px) {
+  .testmonials-bg-image {
+    background-image: url("./assets/Home/Testimonials_leaf.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  .blooming_flowers_bg {
+    background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
+    height: 100vh !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
 }
+
 .bg-about-img {
   background-image: url("./assets/About/bg_cover.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-.blooming_flowers_bg {
-  background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
-  height: 100vh !important;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left;
-}
+
 .bg-projects-img {
   background-image: url("./assets/projects_cover.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
 }
-.bg-birds-in-the-paradise-projects{
+.bg-birds-in-the-paradise-projects {
   background-image: url("./assets/birds_in_the_paradise.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-.bg-nature-nest-projects{
+.bg-nature-nest-projects {
   background-image: url("./assets/natures_nest.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-@media (max-width: 1200px) {
+.bg-careers-img {
+  background-image: url("./assets/careers_cover.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (min-width: 768px )and ( max-width: 1200px) {
   .blooming_flowers_bg {
     background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
     height: 50vh !important;
@@ -86,15 +96,7 @@
     background-position: left;
   }
 }
-@media (max-width: 768px) {
-  .blooming_flowers_bg {
-    background-image: url("./assets/About/where_days_unfold_like_blooming_flowers.jpg");
-    height: 50vh !important;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left;
-  }
-}
+
 .menu-item-home {
   transform: translateX(-20px);
 }
@@ -218,13 +220,52 @@
 .font-weight-800 {
   font-weight: 800 !important;
 }
-.overflow-x-hidden{
+.overflow-x-hidden {
   overflow-x: hidden !important;
-}.text-light-green {
+}
+.text-light-green {
   color: #95b67b !important;
 }
-.font-size-14{
-  font-size: 14px !important;
+.font-size-10 {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.read-animation {
+  height: 100%;
+  animation: read-more-animation 2s ease-in;
+}
+@keyframes read-more-animation {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+/* Give space for pagination always */
+.testimonials-swiper {
+  padding-bottom: 40px;
 }
 
-
+/* Default Swiper pagination for Desktop (absolute) */
+.testimonials-swiper .swiper-pagination {
+  bottom: 0 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #35674E !important;
+  opacity: 1 !important;
+}
+/* On small screens -> make it come after content (no overlap) */
+@media (max-width: 768px) {
+  .testimonials-swiper .swiper-pagination {
+    position: relative !important;
+    margin-top: 16px;
+    bottom: 0 !important;
+  }
+}
+.text-dark-green{
+  color:#35674E !important;
+}
+.text-light-green-hover:hover{
+  color:#95b67b !important;
+}

@@ -9,7 +9,7 @@ const NatureNest = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full h-full flex items-end justify-end"
         >
-          <h1 className="text-[#95b67b] w-full text-center mb-[20px]">
+          <h1 className="text-white w-full text-center mb-[20px]">
             Nature’s Nest
           </h1>
         </motion.div>

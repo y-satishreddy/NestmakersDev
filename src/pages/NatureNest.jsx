@@ -4,9 +4,9 @@ import NatureNest from "../components/Projects/NatureNest";
 const About = () => {
   return (
     <>
-      <Navbar />
+
       <NatureNest/>
-      <Footer/>
+
     </>
   );
 };

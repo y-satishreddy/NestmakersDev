@@ -121,7 +121,7 @@ const ContactForm = () => {
         opportunity with us!
       </motion.h2>
 
-      <div className="w-full max-w-[480px]">
+      <div className="w-full max-w-[500px]">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-start w-full gap-1"
@@ -296,7 +296,7 @@ const ContactForm = () => {
           whileInView={{ scale:1,opacity: 1 }}
           viewport={{ once: true,amount:0.1  }}
           transition={{ duration: 1.2, delay: 1.4, ease: "easeIn" }}
-          className="font-size-14 pt-[15px] text-light-green"
+          className="font-size-10 pt-[15px] text-light-green"
         >
           Note: We keep your information strictly confidential and we don’t spam
           your email.

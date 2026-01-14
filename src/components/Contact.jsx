@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Form from "./Form";
+import Form from "./ContactForm";
 const Contact = () => {
   return (
     <>
@@ -13,33 +13,32 @@ const Contact = () => {
           >
             Let’s build your nest together!
           </motion.h1>
-<motion.button
-  onClick={() => {
-    const form = document.getElementById("form");
-    if (!form) return;
+          <motion.button
+            onClick={() => {
+              const form = document.getElementById("form");
+              if (!form) return;
 
-    const header = document.querySelector("header"); // or your navbar selector
-    const headerHeight = header ? header.offsetHeight : 120;
+              const header = document.querySelector("header");
+              const headerHeight = header ? header.offsetHeight : 120;
 
-    const y =
-      form.getBoundingClientRect().top +
-      window.pageYOffset -
-      headerHeight -
-      20; // small breathing space
+              const y =
+                form.getBoundingClientRect().top +
+                window.pageYOffset -
+                headerHeight -
+                20;
 
-    window.scrollTo({
-      top: y,
-      behavior: "smooth",
-    });
-  }}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1.8, ease: "easeIn" }}
-  className="mt-[15px] bg-transparent text-white hover:text-light-green border border-white px-6 py-2 cursor-pointer hover:bg-[#FFFFFF36] transition-hover duration-300"
->
-  GET IN TOUCH
-</motion.button>
-
+              window.scrollTo({
+                top: y,
+                behavior: "smooth",
+              });
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.8, ease: "easeIn" }}
+            className="mt-[15px] bg-transparent text-white hover:text-light-green border border-white px-6 py-2 cursor-pointer hover:bg-[#FFFFFF36] transition-hover duration-300"
+          >
+            GET IN TOUCH
+          </motion.button>
         </div>
       </section>
       <section className="w-full flex items-center justify-center">
@@ -68,7 +67,7 @@ const Contact = () => {
                 transition={{ duration: 0.8, ease: "easeIn" }}
                 viewport={{ once: true }}
               >
-                <a href="">(+91) 63669 63669</a>
+                <a href="tel:+916366963669" target="_blank">(+91) 63669 63669</a>
               </motion.h2>
               <motion.p
                 className="text-light-green font-semibold mb-[15px]"
@@ -77,7 +76,7 @@ const Contact = () => {
                 transition={{ duration: 0.8, ease: "easeIn", delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <a href="">sales@nestmakers.in</a>
+                <a href="mailto:sales@nestmakers.in" target="_blank" className="hover:text-[#35674E]">sales@nestmakers.in</a>
               </motion.p>
               <motion.p
                 initial={{ x: "100%", opacity: 0 }}
