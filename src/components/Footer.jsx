@@ -118,9 +118,9 @@ const Footer = () => {
           viewport={{ once: true }}
           className="border h-[1px] w-full md:w-[60%] border-[#95B67B] my-[20px] "
         ></motion.div>
-        <p>
-          <div>
-            <motion.div
+        <p className="text-center">
+          
+            <motion.span
               initial={{ y: "100%", opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeIn", delay: 0.4 }}
@@ -137,8 +137,8 @@ const Footer = () => {
               >
                 White Thoughts and Branding
               </a>
-            </motion.div>
-          </div>
+            </motion.span>
+          
         </p>
       </div>
     </footer>

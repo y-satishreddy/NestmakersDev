@@ -266,6 +266,16 @@
 .text-dark-green{
   color:#35674E !important;
 }
-.text-light-green-hover:hover{
-  color:#95b67b !important;
+.text-black-hover:hover{
+  color:black !important;
+}
+.line-height-25{
+  line-height: 25px !important;
+}
+.line-height-23{
+  line-height: 23px !important;
+}
+.a-tag{
+  font-size: 16px !important;
+  text-decoration: underline !important;
 }

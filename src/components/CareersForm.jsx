@@ -32,10 +32,10 @@ const CareersForm = () => {
     } else {
       const allowedTypes = [
         "application/pdf",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // docx
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
       ];
 
-      const maxSize = 2 * 1024 * 1024; 
+      const maxSize = 2 * 1024 * 1024;
       if (!allowedTypes.includes(cv.type)) {
         newErrors.cv = "Only PDF or DOCX files are allowed.";
       } else if (cv.size > maxSize) {
@@ -58,9 +58,9 @@ const CareersForm = () => {
         message: message,
       };
 
-      console.log("✅ Form Data Object:", formDataObject);
+      console.log("Form Data Object:", formDataObject);
 
-      alert("Form submitted successfully ✅");
+      alert("Form submitted successfully");
 
       setRole("");
       setCv(null);
@@ -71,7 +71,7 @@ const CareersForm = () => {
 
   return (
     <motion.div
-      className="border border-[#35674e] mt-[10px] p-4 max-w-[400px]"
+      className="border border-[#35674e] mt-[10px] p-4 w-full md:max-w-[400px]"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1, ease: "easeInOut" }}
@@ -79,14 +79,14 @@ const CareersForm = () => {
     >
       <form onSubmit={handleSubmit}>
         <motion.div
-          className="mb-[20px]"
+          className="mb-[15px]"
           initial={{ y: "100%", opacity: 0 }}
           whileInView={{ y: "0", opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4, ease: "easeInOut" }}
           viewport={{ once: true }}
         >
           <label htmlFor="roles">
-            <p className="text-white">
+            <p className="text-white ">
               Open Positions <span className="text-red-600">*</span>
             </p>
           </label>
@@ -97,10 +97,17 @@ const CareersForm = () => {
               id="roles"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full bg-[#95b67b] p-2 text-[#35674e] text-[16px] font-medium focus:outline-none border-[1px] border-white"
+              className="w-full  p-2 text-[#35674e] text-[16px] font-medium focus:outline-none border-[1px] border-white"
             >
               <option value="" disabled hidden>
-                Select Position
+                Open Positions
+              </option>
+
+              <option
+                value="Project Manager - Civil"
+                className="bg-white text-[#35674e]"
+              >
+                Project Manager - Civil
               </option>
 
               <option
@@ -116,17 +123,34 @@ const CareersForm = () => {
               >
                 Planning Engineer
               </option>
-
               <option
                 value="Quantity Surveyor"
                 className="bg-white text-[#35674e]"
               >
                 Quantity Surveyor
               </option>
+              <option
+                value="Engineer - Quality Control"
+                className="bg-white text-[#35674e]"
+              >
+                Engineer - Quality Control
+              </option>
+              <option
+                value="Store Manager - Civil"
+                className="bg-white text-[#35674e]"
+              >
+                Store Manager - Civil
+              </option>
+              <option
+                value="Store Executive - Civil"
+                className="bg-white text-[#35674e]"
+              >
+                Store Executive - Civil
+              </option>
             </select>
           </div>
 
-          <p className="text-red-500 text-sm mt-1 h-[18px] leading-[18px] block">
+          <p className=" font-size-10  h-[14px] block text-dark-green">
             {errors.role}
           </p>
         </motion.div>
@@ -153,7 +177,7 @@ const CareersForm = () => {
               onChange={(e) => setCv(e.target.files[0])}
               className="
                 w-full
-                bg-[#95b67b] text-[#35674e]
+                 text-[#35674e]
                 border border-white
                 p-2
                 file:bg-white
@@ -167,7 +191,7 @@ const CareersForm = () => {
             />
           </div>
 
-          <p className="text-red-500 text-sm mt-1 h-[18px] leading-[18px] block">
+          <p className=" font-size-10 text-dark-green h-[14px] block">
             {errors.cv}
           </p>
         </motion.div>
@@ -179,7 +203,7 @@ const CareersForm = () => {
           viewport={{ once: true }}
         >
           <label htmlFor="message">
-            <p className="text-white mb-[5px]">
+            <p className="text-white mb-[5px] ">
               Message <span className="text-red-600">*</span>
             </p>
           </label>
@@ -191,9 +215,10 @@ const CareersForm = () => {
             placeholder="Message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full bg-[#95b67b] focus:outline-none p-2 border-white border-[1px]"></textarea>
+            className="w-full text-dark-green focus:outline-none p-2 border-white border-[1px]"
+          ></textarea>
 
-          <p className="text-red-500 text-sm mt-1 h-[18px] leading-[18px] block">
+          <p className=" font-size-10  h-[14px] block text-dark-green">
             {errors.message}
           </p>
         </motion.div>
@@ -204,7 +229,7 @@ const CareersForm = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.8, delay: 1.2, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="px-8 py-2 border-white border-[1px] mt-[20px] text-white hover:bg-[#35674e] transition-hover duration-300 ease-in"
+          className="px-8 py-2 border-white border-[1px] mt-[15px] text-white hover:bg-[#35674e] transition-hover duration-300 ease-in"
         >
           Submit Now
         </motion.button>

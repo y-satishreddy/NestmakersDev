@@ -31,7 +31,7 @@ h1,h2 {
     line-height: 26px !important;
   }
 }
-p {
+p,.lists {
     font-family: "area-normal", sans-serif;
   font-size: 16px !important;
   font-weight: 400 !important;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { motion } from "framer-motion";
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,8 +19,9 @@ const ContactForm = () => {
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   const urlRegex = /(https?:\/\/[^\s]+)/gi;
 
-  const validatePhone = () => {
-    const mobile = formData.mobile;
+  // ✅ Phone validation
+  const validatePhone = (mobileValue) => {
+    const mobile = mobileValue || "";
 
     if (selectedCountry === "in") {
       const indianRegex = /^[6-9]\d{9}$/;
@@ -29,59 +31,138 @@ const ContactForm = () => {
     return mobile.length > 0;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
+  // ✅ Country change
   const handleCountryChange = (countryCodeValue, countryData) => {
     setSelectedCountry(countryData.countryCode);
     setCountryCode(`+${countryData.dialCode}`);
-    setFormData({ ...formData, mobile: "" });
+
+    setFormData((prev) => ({
+      ...prev,
+      mobile: "",
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      mobile: "",
+    }));
   };
 
+  // ✅ Live validation for Name / Email / Message
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => {
+      let newErrors = { ...prev };
+
+      // FULL NAME
+      if (name === "name") {
+        if (!value.trim()) {
+          newErrors.name = "Please enter your full name.";
+        } else if (!nameRegex.test(value)) {
+          newErrors.name = "Only letters, spaces and '.' are allowed.";
+        } else {
+          newErrors.name = "";
+        }
+      }
+
+      // EMAIL
+      if (name === "email") {
+        if (!value.trim()) {
+          newErrors.email = "Please enter a valid email.";
+        } else if (!emailRegex.test(value)) {
+          newErrors.email = "Please enter a valid email.";
+        } else {
+          newErrors.email = "";
+        }
+      }
+
+      // MESSAGE
+      if (name === "message") {
+        if (!value.trim()) {
+          newErrors.message = "Message is required.";
+        } else if (value.length > 150) {
+          newErrors.message = "Message must be max 150 characters.";
+        } else if (urlRegex.test(value)) {
+          newErrors.message = "Invalid message (no URLs allowed).";
+        } else {
+          newErrors.message = "";
+        }
+      }
+
+      return newErrors;
+    });
+  };
+
+  // ✅ Final validation on submit (important)
   const validate = () => {
     let newErrors = {};
 
-    if (!formData.name || !nameRegex.test(formData.name)) {
-      newErrors.name = "Please enter a valid name.";
+    // NAME
+    if (!formData.name.trim()) {
+      newErrors.name = "Please enter your full name.";
+    } else if (!nameRegex.test(formData.name.trim())) {
+      newErrors.name = "Only letters, spaces and '.' are allowed.";
     }
 
-    if (!formData.email || !emailRegex.test(formData.email)) {
+    // EMAIL
+    if (!formData.email.trim()) {
+      newErrors.email = "Please enter a valid email.";
+    } else if (!emailRegex.test(formData.email.trim())) {
       newErrors.email = "Please enter a valid email.";
     }
 
-    if (!formData.mobile || !validatePhone()) {
+    // MOBILE
+    if (!formData.mobile.trim()) {
+      newErrors.mobile =
+        selectedCountry === "in"
+          ? "Enter valid Indian number (starts with 6/7/8/9 and 10 digits)."
+          : "Enter a valid phone number.";
+    } else if (!validatePhone(formData.mobile.trim())) {
       newErrors.mobile =
         selectedCountry === "in"
           ? "Enter valid Indian number (starts with 6/7/8/9 and 10 digits)."
           : "Enter a valid phone number.";
     }
 
-    if (
-      !formData.message ||
-      formData.message.length > 150 ||
-      urlRegex.test(formData.message)
-    ) {
+    // MESSAGE
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required.";
+    } else if (formData.message.length > 150) {
+      newErrors.message = "Message must be max 150 characters.";
+    } else if (urlRegex.test(formData.message)) {
       newErrors.message = "Invalid message (no URLs, max 150 chars).";
     }
 
     setErrors(newErrors);
+
     return Object.keys(newErrors).length === 0;
   };
 
+  // ✅ Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validate()) return;
 
     const payload = {
-      name: formData.name,
-      email: formData.email,
-      mobile: formData.mobile,
-      message: formData.message,
-      fullPhoneNumber: `${countryCode}${formData.mobile}`,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      mobile: formData.mobile.trim(),
+      message: formData.message.trim(),
+      fullPhoneNumber: `${countryCode}${formData.mobile.trim()}`,
     };
-    console.log(payload);
+
+    // ✅ Print object in console
+    console.log("✅ Form Submitted Payload:", payload);
+
+    // ✅ If you don’t want API now, just return here
+    // return;
+
     try {
       const response = await fetch("https://your-api-endpoint.com/contact", {
         method: "POST",
@@ -114,7 +195,7 @@ const ContactForm = () => {
         className="text-[#35674E] mb-[20px]"
         initial={{ y: "200%", opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true,amount:0.1  }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.8, ease: "easeIn" }}
       >
         Find the best investment <br className="md:block hidden" />
@@ -165,15 +246,36 @@ const ContactForm = () => {
             `}
           </style>
 
+          {/* ✅ NAME (block numbers/special chars while typing) */}
           <motion.input
             initial={{ y: "200%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true ,amount:0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeIn" }}
             type="text"
             name="name"
             value={formData.name}
-            onChange={handleChange}
+            onChange={(e) => {
+              const { value } = e.target;
+
+              // ✅ Allow only letters, spaces, and dots
+              const cleanedValue = value.replace(/[^A-Za-z.\s]/g, "");
+
+              setFormData((prev) => ({
+                ...prev,
+                name: cleanedValue,
+              }));
+
+              setErrors((prev) => ({
+                ...prev,
+                name:
+                  cleanedValue.trim() === ""
+                    ? "Please enter your full name."
+                    : cleanedValue !== value
+                    ? "Only letters, spaces and '.' are allowed."
+                    : "",
+              }));
+            }}
             className="form-input text-left"
             placeholder="Full Name*"
           />
@@ -185,10 +287,11 @@ const ContactForm = () => {
             </p>
           </div>
 
+          {/* ✅ EMAIL */}
           <motion.input
             initial={{ y: "200%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true,amount:0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 0.8, ease: "easeIn" }}
             type="email"
             name="email"
@@ -207,10 +310,11 @@ const ContactForm = () => {
             </p>
           </div>
 
+          {/* ✅ PHONE */}
           <motion.div
             initial={{ y: "200%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true ,amount:0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: "easeIn" }}
             className="w-full border-b border-gray-300 flex items-center gap-3 relative"
           >
@@ -229,24 +333,57 @@ const ContactForm = () => {
               containerStyle={{ width: "auto" }}
               dropdownStyle={{ zIndex: 1000 }}
             />
+
             <span className="text-[#35674E] font-semibold text-base ml-6 ">
               {countryCode}
             </span>
+
             <div className="h-6 w-px bg-gray-300"></div>
+
             <input
               type="tel"
               name="mobile"
               value={formData.mobile}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  mobile: e.target.value.replace(/\D/g, ""),
-                })
-              }
+              maxLength={selectedCountry === "in" ? 10 : 15}
+              onChange={(e) => {
+                let onlyNumbers = e.target.value.replace(/\D/g, "");
+
+                // ✅ India: force 10 digits max
+                if (selectedCountry === "in") {
+                  onlyNumbers = onlyNumbers.slice(0, 10);
+                }
+
+                setFormData((prev) => ({
+                  ...prev,
+                  mobile: onlyNumbers,
+                }));
+
+                // ✅ live mobile validation
+                setErrors((prev) => {
+                  let newErrors = { ...prev };
+
+                  if (!onlyNumbers.trim()) {
+                    newErrors.mobile =
+                      selectedCountry === "in"
+                        ? "Enter valid Indian number (starts with 6/7/8/9 and 10 digits)."
+                        : "Enter a valid phone number.";
+                  } else if (!validatePhone(onlyNumbers)) {
+                    newErrors.mobile =
+                      selectedCountry === "in"
+                        ? "Enter valid Indian number (starts with 6/7/8/9 and 10 digits)."
+                        : "Enter a valid phone number.";
+                  } else {
+                    newErrors.mobile = "";
+                  }
+
+                  return newErrors;
+                });
+              }}
               placeholder="Phone Number*"
               className="flex-1 border-none outline-none bg-transparent text-left transition-colors text-[#35674E]"
             />
-            <div className="absolute left-0 bottom-[-18px] w-full">
+
+            <div className="absolute left-0 bottom-[-23px] w-full  ">
               <p
                 className={
                   errors.mobile ? "error-text" : "error-text error-hidden"
@@ -257,10 +394,11 @@ const ContactForm = () => {
             </div>
           </motion.div>
 
+          {/* ✅ MESSAGE */}
           <motion.textarea
             initial={{ y: "200%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true,amount:0.1  }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 1, ease: "easeIn" }}
             name="message"
             value={formData.message}
@@ -269,6 +407,7 @@ const ContactForm = () => {
             placeholder="Message / Query*"
             rows="2"
           ></motion.textarea>
+
           <div className="error-container">
             <p
               className={
@@ -282,7 +421,7 @@ const ContactForm = () => {
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true,amount:0.1  }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1.6, delay: 0.8, ease: "easeInOut" }}
             className=" px-8 py-1 bg-white border border-[#35674E] hover-gradient hover:text-white hover:bg-[#35674E] transition-all duration-300"
             type="submit"
@@ -292,9 +431,9 @@ const ContactForm = () => {
         </form>
 
         <motion.p
-          initial={{ scale:0,opacity: 0 }}
-          whileInView={{ scale:1,opacity: 1 }}
-          viewport={{ once: true,amount:0.1  }}
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 1.2, delay: 1.4, ease: "easeIn" }}
           className="font-size-10 pt-[15px] text-light-green"
         >
